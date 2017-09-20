@@ -22,13 +22,13 @@ Prerequisites
 Theory
 ---
 
-Many real numbers cannot be represented accurately on a computer. For example, <img src="http://www.sciweavers.org/tex2img.php?eq=%24%5Csqrt%7B2%7D%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="$\sqrt{2}$" width="24" height="16" /> is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
+Many real numbers cannot be represented accurately on a computer. For example, the square root of two is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
 
 1.  A natural number is a number that can be the cardinal of a finite set.
 2.  An integer is the set of natural numbers extended by the set of negative whole numbers.
-3.  A fraction is a pair <img src="http://www.sciweavers.org/tex2img.php?eq=%24%28i%2Cj%29%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="$(i,j)$" width="26" height="16" /> of integers where <img src="http://www.sciweavers.org/tex2img.php?eq=%24j%5Cneq%200%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="$j\neq 0$" width="30" height="16" />. We write <img src="http://www.sciweavers.org/tex2img.php?eq=%20%5Cfrac%7Bi%7D%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt=" \frac{i}{j}" width="11" height="47" /> for the pair <img src="http://www.sciweavers.org/tex2img.php?eq=%28i%2Cj%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="(i,j)" width="30" height="16" />. If <img src="http://www.sciweavers.org/tex2img.php?eq=%5Cfrac%7Bi%7D%7Bj%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\frac{i}{j}" width="11" height="47" /> and $\frac{k}{l}$ are fractions, then $\frac{i}{j} =_{\textrm{frac}} \frac{k}{l}$ iff $i\cdot l = j\cdot k$.
-4.  A rational number is an integer or a fraction. If $r$ is a fraction $\frac{a}{b}$ and $s$ is an integer, then $\frac{a}{b} = s$ iff $a = b\cdot s$.
-5.  A real number is a convergent sequence of rational numbers. If $x$ is a real number and $\lim_{n\rightarrow \inf}x(n) = L$, then x represents $L \in R$.
+3.  A fraction is a pair (_i_,_j_) of integers where _j_ != 0. We write _i_/_j_ for the pair (_i_,_j_). If _i_/_j_ and _k_/_l_ are fractions, then _i_/_j_ = _k_/_l_ iff _i_*_l_ = _j_*_k_.
+4.  A rational number is an integer or a fraction. If _r_ is a fraction _a_/_b_ and _s_ is an integer, then _a_/_b_ = _s_ iff _a_ = _b_ * _s_.
+5.  A real number is a convergent sequence of rational numbers. If _x_ is a real number and the limit of _x_(_n_) as _n_ approaches infinity is _L_, then _x_ represents the number _L_.
 
 In our library, we represented fractions using the `Fraction` class. Real numbers were implemented by defining functions which were to return a function with the signature `int x(int)`. `x(n)` would return the `n`th number in the sequence `x`. For example, a real number representing the integer 2 would be implemented as follows:
 
@@ -36,24 +36,24 @@ In our library, we represented fractions using the `Fraction` class. Real number
 two = lambda n: Fraction(2,1)
 ```
 
-Since $\lim_{n\rightarrow \inf}c = c$, we know that `two()` represents 2.
+Since the limit of any number _c_ as _n_ approaches infinity is _c_, we know that `two()` represents 2.
 
 The implementation of addition, subtraction, multiplication, and division were informed by [proofs of limit laws](). Central to these proofs was the following definition:
 
-> If $x$ is a real number that converges to $L$, then for every $e\gt 0$, there is a natural number $K$ such that for every $n\gt K$, $\abs{x_n - L} \lt e$.
+> If _x_ is a real number that converges to _L_, then for every _e_ > 0, there is a natural number _K_ such that for every _n_ > _K_, |_x_(_n_)-_L_| < _e_.
 
 For example, the following proof is relevant to addition:
 
-Theorem: If $x$ converges to $L$, and $y$ converges to $M$, then $(\lambda n\ldot x_n + y_n)$ converges to $(L+M)$.
+Theorem: If _x_ converges to _L_, and _y_ converges to _M_, then (_x_(_n_)+_y_(_n_)) converges to (_L_+_M_).
 Proof (by deduction rule, 1 |- 3):
-1.  Suppose a.) $x$ converges to $L$ and b.) $y$ converges to $M$.
-2.  For every $e\gt 0$, there is a $K$ such that for all $n\gt K$, $\abs{(\lambda n\ldot x_n + y_n) - (L+M)}\lt e$ (by universal introduction, a |- e).
-  a.  Suppose $e>0$.
-  b.  Choose $K_1$ such that for all $n\gt K_1$, $\abs{\lambda n\ldot x_n - L} \lt \frac{e}{2}$ (by 1a, existential elimination, and the definition of convergence).
-  c.  Choose $K_2$ such that for all $n\gt K_2$, $\abs{\lambda n\ldot y_n - M} \lt \frac{e}{2}$ (by 1b, existential elimination and the definition of convergence).
-  d.  For all $n\gt \textrm{max}(K_1,K_2)$, $\abs{(\lambda n\ldot x_n + y_n) - (L+M)}\lt e$ (by 2b, 2c).
-  e.  There is a $K$ such that for all $n\gt K$, $\abs{(\lambda n\ldot x_n + y_n) - (L+M)}\lt e$ (by existential introduction, 2d).
-3.  $(\lambda n\ldot x_n + y_n)$ converges to $(L+M)$ (by 2).
+1.  Suppose a.) _x_ converges to _L_ and b.) _y_ converges to _M_.
+2.  For every _e_ > 0, there is a _K_ such that for all _n_ > _K_, |(_x_(_n_)+_y_(_n_)) - (_L_+_M_)| < _e_ (by universal introduction, a |- e).
+  a.  Suppose _e_ > 0.
+  b.  Choose *K*1 such that for all _n_ > *K*1, |_x_(_n_) - _L_| < _e_/2 (by 1a, existential elimination, and the definition of convergence).
+  c.  Choose *K*2 such that for all _n_ > *K*2, |_y_(_n_) - _M_| < _e_/2 (by 1b, existential elimination and the definition of convergence).
+  d.  For all _n_ > max(*K*1,*K*2), |(_x_(_n_)+_y_(_n_)) - (_L_+_M_)| < _e_ (by 2b, 2c).
+  e.  There is a _K_ such that for all _n_ > _K_, |(_x_(_n_)+_y_(_n_)) - (_L_+_M_)| < _e_ (by existential introduction, 2d).
+3.  (_x_(_n_)+_y_(_n_)) converges to (_L_+_M_) (by 2).
 
 Therefore we derive the function:
 
@@ -63,15 +63,15 @@ def add(x,y): return (lambda n: x(n) + y(n))
 
 The implementation of sine is more complicated. We considered the following formulation of Taylor's Theorem:
 
-> Suppose $f$'s $n$th derivative is continuous over the interval $[a,b]$, that $f^{(n+1)}$ exists on $[a,b]$, and that $x_0 \in [a,b]$. For every $x\in [a,b]$ there exists a number $z(x)$ between $x_0$ and $x$ such that 
-> $f(x) = P_n(x) + R_n(x)$
-> where $P_n(x) = \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$ and $R_n(x) = \frac{f^{(n+1)}(z(x))}{(n+1)!}(x-x_0)^{(n+1)}$.
+> Suppose _f_'s *n*th derivative is continuous over the interval [_a_,_b_], that _f_^(_n_+1) exists on [_a_,_b_], and that *x*0 is in the interval [_a_,_b_]. For every _x_ in [_a_,_b_] there exists a number _z_(_x_) between *x*0 and *x* such that 
+> *f*(*x*) = *Pn*(*x*) + *Rn*(*x*)
+> where *Pn*(*x*) = sum from *k*=0 to *n* of ((_k_th derivative of _f_)(_x_0)/(_k_!))*(_x_-_x_0)^_k_ and _Rn_(_x_) = (((_n_+1)th derivative of _f_)(_z_(_x_))/(_n_+1)!)*(_x_-_x_0)^(_n_+1).
 
-Here, $P_n(x)$ is the $n$th Taylor polynomial and $R_n(x)$ is the remainder or error term. For sine, we determined that
+Here, _Pn_(_x_) is the _n_th Taylor polynomial and _Rn_(_x_) is the remainder or error term. For sine, we determined that
 
-> $\abs{R_n(x)} = \abs{\frac{\textrm{sin}^{(n+1)}(z)}{(n+1)!}(x-x_0)^{(n+1)} \le \frac{1}{(n+1)!}(x-x_0)$.
+> |_Rn_(_x_)| = |(((_n_+1)th derivative of sin)(_z_)/(_n_+1)!)*(_x_-_x_0)^(n+1)| < (1/(_n_+1)!)(_x_-_x_0)$.
 
-Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term $R_n(x)$ is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the $n$th Taylor polynomial of the sine of $x$ where $R_n(x)\lt$ `eps`. We proved that if $x$ converges to $L$, then $\lambda\ldot n \textrm{sineQ}(x_n, \frac{1}{n})$ converges to $\textrm{sin}(L)$. Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
+Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term _Rn_(_x_)$ is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the _n_th Taylor polynomial of the sine of _x_ where _Rn_(_x_) < `eps`. We proved that if _x_ converges to _L_, then sineQ(_x_(_n_), 1/_n_) converges to sin(_L_). Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
 
 Usage
 ---
