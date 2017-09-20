@@ -1,7 +1,8 @@
 Real Number Library – Python
 ===
 
-##Table of Contents
+Table of Contents
+---
 
 - [Synopsis](#synopsis)
 - [Prerequisites](#prerequisites)
