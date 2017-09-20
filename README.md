@@ -77,7 +77,7 @@ Therefore, to find the sine of a number to a certain number of digits, we merely
 Usage
 ---
 
-Run project1_002.py in your Python 3 shell environment. The functions `add(x, y)`, `mult(x, y)`, `sub(x, y)`, `div(x, y)`, and `sine(x)`. Inputs must be functions which have the signature `Fraction x(int)`. Return values will be functions which have the signature `Fraction x(int)`. The utility function `fr(x,y)` can be used in place of `Fraction(x,y)`.
+Run project1_002.py in your Python 3 shell environment. The functions `add(x, y)`, `mult(x, y)`, `sub(x, y)`, `div(x, y)`, and `sine(x)` are available. Inputs must be functions which have the signature `Fraction x(int)`. Return values will be functions which have the signature `Fraction x(int)`. The utility function `fr(x,y)` can be used in place of `Fraction(x,y)`.
 
 Example Input and Output
 ---
