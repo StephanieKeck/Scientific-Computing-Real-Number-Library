@@ -22,7 +22,7 @@ Prerequisites
 Theory
 ---
 
-Many real numbers cannot be represented accurately on a computer. For example, ![equation](https://latex.codecogs.com/gif.latex?\inline&space;$\sqrt{2}$" title="$\sqrt{2}$) is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
+Many real numbers cannot be represented accurately on a computer. For example, ![equation](https://latex.codecogs.com/gif.latex?\inline&space;$\sqrt{2}$) is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
 
 1.  A natural number is a number that can be the cardinal of a finite set.
 2.  An integer is the set of natural numbers extended by the set of negative whole numbers.
