@@ -13,7 +13,7 @@ Table of Contents
 Synopsis
 ---
 
-Class project for CS 4328 Scientific Computing at Texas Tech University during the spring semester of 2017. Command-line program written in Python 3 that XXX. 
+Class project for CS 4328 Scientific Computing at Texas Tech University during the spring semester of 2017. Command-line program written in Python 3 that implements certain real number functions with a focus on accuracy. 
 
 Prerequisites 
 ---
