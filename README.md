@@ -1,6 +1,14 @@
 Real Number Library – Python
 ===
 
+##Table of Contents
+
+- [Synopsis](#synopsis)
+- [Prerequisites](#prerequisites)
+- [Theory](#theory)
+- [Usage](#usage)
+- [Example Input/Output](#example-input-output)
+
 Synopsis
 ---
 
@@ -11,10 +19,10 @@ Prerequisites
 
 1. Python 3 shell environment
 
-Detailed Explanation
+Theory
 ---
 
-Many real numbers cannot be represented accurately on a computer. For example, $\sqrt{2}$ is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
+Many real numbers cannot be represented accurately on a computer. For example, $`\sqrt{2}`$ is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
 
 1.  A natural number is a number that can be the cardinal of a finite set.
 2.  An integer is the set of natural numbers extended by the set of negative whole numbers.
@@ -25,7 +33,7 @@ Many real numbers cannot be represented accurately on a computer. For example, $
 In our library, we represented fractions using the `Fraction` class. Real numbers were implemented by defining functions which were to return a function with the signature `int x(int)`. `x(n)` would return the `n`th number in the sequence `x`. For example, a real number representing the integer 2 would be implemented as follows:
 
 ```
-def two(): return (lambda n: Fraction(2,1))
+two = lambda n: Fraction(2,1)
 ```
 
 Since $\lim_{n\rightarrow \inf}c = c$, we know that `two()` represents 2.
@@ -53,7 +61,7 @@ Therefore we derive the function:
 def add(x,y): return (lambda n: x(n) + y(n))
 ```
 
-Sine is implemented with guarantees on accuracy. If `x` is a real number, `sine(x)(n)` will return the sine of `x` accurate to `n` digits. The implementation of `sine(x)` is based on the following formulation of Taylor's Theorem:
+The implementation of sine is more complicated. We considered the following formulation of Taylor's Theorem:
 
 > Suppose $f$'s $n$th derivative is continuous over the interval $[a,b]$, that $f^{(n+1)}$ exists on $[a,b]$, and that $x_0 \in [a,b]$. For every $x\in [a,b]$ there exists a number $z(x)$ between $x_0$ and $x$ such that 
 > $f(x) = P_n(x) + R_n(x)$
@@ -63,4 +71,35 @@ Here, $P_n(x)$ is the $n$th Taylor polynomial and $R_n(x)$ is the remainder or e
 
 > $\abs{R_n(x)} = \abs{\frac{\textrm{sin}^{(n+1)}(z)}{(n+1)!}(x-x_0)^{(n+1)} \le \frac{1}{(n+1)!}(x-x_0)$.
 
-Therefore, to find the sine of a number to a certain number of digits, we merely needed to find a number `n` such that the error term $R_n(x)$ was less than our desired error `eps`. The function 
+Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term $R_n(x)$ is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the $n$th Taylor polynomial of the sine of $x$ where $R_n(x)\lt$ `eps`. We proved that if $x$ converges to $L$, then $\lambda\ldot n \textrm{sineQ}(x_n, \frac{1}{n})$ converges to $\textrm{sin}(L)$. Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
+
+Usage
+---
+
+Run xxx.py in your Python 3 shell environment. The functions `add(x, y)`, `mult(x, y)`, `sub(x, y)`, `div(x, y)`, and `sine(x)`. Inputs must be functions which have the signature `Fraction x(int)`. Return values will be functions which have the signature `Fraction x(int)`. The utility function `fr(x,y)` can be used in place of `Fraction(x,y)`.
+
+Example Input/Output
+---
+
+```
+>>> two = lambda n: fr(2,1)
+>>> two(5)
+Fraction(2, 1)
+>>> three = lambda n: fr(3,1)
+>>> five = add(two,three)
+>>> five(5)
+Fraction(5, 1)
+>>> six = mult(two,three)
+>>> six(1)
+Fraction(6, 1)
+>>> twoThirds = div(two,three)
+>>> twoThirds(1)
+Fraction(2, 3)
+>>> sineTwo = sine(two)
+>>> sineTwo(1)
+Fraction(2, 3)
+>>> sineTwo(5)
+Fraction(14, 15)
+>>> sineTwo(50)
+Fraction(286, 315)
+```
