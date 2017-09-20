@@ -22,7 +22,7 @@ Prerequisites
 Theory
 ---
 
-Many real numbers cannot be represented accurately on a computer. For example, <img src="http://www.sciweavers.org/tex2img.php?eq=%24%5Csqrt%7B2%7D%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="$\sqrt{2}$" width="28" height="19" /> is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
+Many real numbers cannot be represented accurately on a computer. For example, <img src="http://www.sciweavers.org/tex2img.php?eq=%24%5Csqrt%7B2%7D%24&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="$\sqrt{2}$" width="24" height="16" /> is irrational and thus has infinitely many nonrepeating digits. Therefore it cannot be represented in the finite space of computer memory. To get around this limitation, we devised the following alternate definitions:
 
 1.  A natural number is a number that can be the cardinal of a finite set.
 2.  An integer is the set of natural numbers extended by the set of negative whole numbers.
