@@ -8,7 +8,7 @@ Table of Contents
 - [Prerequisites](#prerequisites)
 - [Theory](#theory)
 - [Usage](#usage)
-- [Example Input/Output](#example-input-output)
+- [Example Input and Output](#example-input-and-output)
 
 Synopsis
 ---
@@ -79,7 +79,7 @@ Usage
 
 Run project1_002.py in your Python 3 shell environment. The functions `add(x, y)`, `mult(x, y)`, `sub(x, y)`, `div(x, y)`, and `sine(x)`. Inputs must be functions which have the signature `Fraction x(int)`. Return values will be functions which have the signature `Fraction x(int)`. The utility function `fr(x,y)` can be used in place of `Fraction(x,y)`.
 
-Example Input/Output
+Example Input and Output
 ---
 
 ```
