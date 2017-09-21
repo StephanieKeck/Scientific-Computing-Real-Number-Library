@@ -49,11 +49,11 @@ Theorem: If *x* converges to *L*, and *y* converges to *M*, then (*x*(*n*)+*y*(*
 Proof (by deduction rule, 1 |- 3):
 1.  Suppose a.) *x* converges to *L* and b.) *y* converges to *M*.
 2.  For every *e* > 0, there is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by universal introduction, a |- e).
-   a.  Suppose *e* > 0.
-   b.  Choose *K*1 such that for all *n* > *K*1, |*x*(*n*) - *L*| < *e*/2 (by 1a, existential elimination, and the definition of convergence).
-   c.  Choose *K*2 such that for all *n* > *K*2, |*y*(*n*) - *M*| < *e*/2 (by 1b, existential elimination and the definition of convergence).
-   d.  For all *n* > max(*K*1,*K*2), |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by 2b, 2c).
-   e.  There is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by existential introduction, 2d).
+   1.  Suppose *e* > 0.
+   2.  Choose *K*1 such that for all *n* > *K*1, |*x*(*n*) - *L*| < *e*/2 (by 1a, existential elimination, and the definition of convergence).
+   3.  Choose *K*2 such that for all *n* > *K*2, |*y*(*n*) - *M*| < *e*/2 (by 1b, existential elimination and the definition of convergence).
+   4.  For all *n* > max(*K*1,*K*2), |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by 2b, 2c).
+   5.  There is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by existential introduction, 2d).
 3.  (*x*(*n*)+*y*(*n*)) converges to (*L*+*M*) (by 2).
 
 Therefore we derive the function:
