@@ -47,14 +47,14 @@ For example, the following proof is relevant to addition:
 
 Theorem: If *x* converges to *L*, and *y* converges to *M*, then (*x*(*n*)+*y*(*n*)) converges to (*L*+*M*).
 Proof (by deduction rule, 1 |- 3):
-1.  Suppose a.) *x* converges to *L* and b.) *y* converges to *M*.
-2.  For every *e* > 0, there is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by universal introduction, a |- e).
-   1.  Suppose *e* > 0.
-   2.  Choose *K*1 such that for all *n* > *K*1, |*x*(*n*) - *L*| < *e*/2 (by 1a, existential elimination, and the definition of convergence).
-   3.  Choose *K*2 such that for all *n* > *K*2, |*y*(*n*) - *M*| < *e*/2 (by 1b, existential elimination and the definition of convergence).
-   4.  For all *n* > max(*K*1,*K*2), |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by 2b, 2c).
-   5.  There is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by existential introduction, 2d).
-3.  (*x*(*n*)+*y*(*n*)) converges to (*L*+*M*) (by 2).
+1. Suppose i.) *x* converges to *L* and ii.) *y* converges to *M*.  
+2. For every *e* > 0, there is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by universal introduction, i |- v).
+    1. Suppose *e* > 0.
+    2. Choose *K*1 such that for all *n* > *K*1, |*x*(*n*) - *L*| < *e*/2 (by 1i, existential elimination, and the definition of convergence).
+    3. Choose *K*2 such that for all *n* > *K*2, |*y*(*n*) - *M*| < *e*/2 (by 1ii, existential elimination and the definition of convergence).
+    4. For all *n* > max(*K*1,*K*2), |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by 2ii, 2iii).
+    5. There is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by existential introduction, 2iv).
+3. (*x*(*n*)+*y*(*n*)) converges to (*L*+*M*) (by 2).
 
 Therefore we derive the function:
 
@@ -64,13 +64,15 @@ def add(x,y): return (lambda n: x(n) + y(n))
 
 The implementation of sine is more complicated. We considered the following formulation of Taylor's Theorem:
 
-> Suppose *f*'s *n*th derivative is continuous over the interval [*a*,*b*], that *f*^(*n*+1) exists on [*a*,*b*], and that *x*0 is in the interval [*a*,*b*]. For every *x* in [*a*,*b*] there exists a number *z*(*x*) between *x*0 and *x* such that 
+> Suppose *f*'s *n*th derivative is continuous over the interval [*a*,*b*], that *f*^(*n*+1) exists on [*a*,*b*], and that *x*0 is in the interval [*a*,*b*]. For every *x* in [*a*,*b*] there exists a number *z*(*x*) between *x*0 and *x* such that
+>
 > *f*(*x*) = *Pn*(*x*) + *Rn*(*x*)
-> where *Pn*(*x*) = sum from *k*=0 to *n* of ((*k*th derivative of *f*)(*x*0)/(*k*!))*(*x*-*x*0)^*k* and *Rn*(*x*) = (((*n*+1)th derivative of *f*)(*z*(*x*))/(*n*+1)!)*(*x*-*x*0)^(*n*+1).
+>
+> where *Pn*(*x*) = sum from *k*=0 to *n* of (\[*k*th derivative of *f*\](*x*0)/(*k*!))*(*x*-*x*0)^*k* and *Rn*(*x*) = (\[(*n*+1)th derivative of *f*\](*z*(*x*))/(*n*+1)!)*(*x*-*x*0)^(*n*+1).
 
 Here, *Pn*(*x*) is the *n*th Taylor polynomial and *Rn*(*x*) is the remainder or error term. For sine, we determined that
 
-> |*Rn*(*x*)| = |(((*n*+1)th derivative of sin)(*z*)/(*n*+1)!)*(*x*-*x*0)^(n+1)| < (1/(*n*+1)!)(*x*-*x*0)$.
+> |*Rn*(*x*)| = |(\[(*n*+1)th derivative of sin\](*z*)/(*n*+1)!)*(*x*-*x*0)^(n+1)| < (1/(*n*+1)!)(*x*-*x*0)$.
 
 Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term *Rn*(*x*) is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the *n*th Taylor polynomial of the sine of *x* where *Rn*(*x*) < `eps`. We proved that if *x* converges to *L*, then sineQ(*x*(*n*), 1/*n*) converges to sin(*L*). Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
 
