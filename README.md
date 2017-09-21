@@ -72,7 +72,7 @@ The implementation of sine is more complicated. We considered the following form
 
 Here, *Pn*(*x*) is the *n*th Taylor polynomial and *Rn*(*x*) is the remainder or error term. For sine, we determined that
 
-> |*Rn*(*x*)| = |(\[(*n*+1)th derivative of sin\](*z*)/(*n*+1)!)*(*x*-*x*0)^(n+1)| < (1/(*n*+1)!)(*x*-*x*0)$.
+> |*Rn*(*x*)| = |(\[(*n*+1)th derivative of sin\](*z*)/(*n*+1)!)*(*x*-*x*0)^(n+1)| < (1/(*n*+1)!)(*x*-*x*0).
 
 Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term *Rn*(*x*) is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the *n*th Taylor polynomial of the sine of *x* where *Rn*(*x*) < `eps`. We proved that if *x* converges to *L*, then sineQ(*x*(*n*), 1/*n*) converges to sin(*L*). Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
 
