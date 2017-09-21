@@ -49,11 +49,11 @@ Theorem: If *x* converges to *L*, and *y* converges to *M*, then (*x*(*n*)+*y*(*
 Proof (by deduction rule, 1 |- 3):
 1.  Suppose a.) *x* converges to *L* and b.) *y* converges to *M*.
 2.  For every *e* > 0, there is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by universal introduction, a |- e).
-  a.  Suppose *e* > 0.
-  b.  Choose *K*1 such that for all *n* > *K*1, |*x*(*n*) - *L*| < *e*/2 (by 1a, existential elimination, and the definition of convergence).
-  c.  Choose *K*2 such that for all *n* > *K*2, |*y*(*n*) - *M*| < *e*/2 (by 1b, existential elimination and the definition of convergence).
-  d.  For all *n* > max(*K*1,*K*2), |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by 2b, 2c).
-  e.  There is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by existential introduction, 2d).
+   a.  Suppose *e* > 0.
+   b.  Choose *K*1 such that for all *n* > *K*1, |*x*(*n*) - *L*| < *e*/2 (by 1a, existential elimination, and the definition of convergence).
+   c.  Choose *K*2 such that for all *n* > *K*2, |*y*(*n*) - *M*| < *e*/2 (by 1b, existential elimination and the definition of convergence).
+   d.  For all *n* > max(*K*1,*K*2), |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by 2b, 2c).
+   e.  There is a *K* such that for all *n* > *K*, |(*x*(*n*)+*y*(*n*)) - (*L*+*M*)| < *e* (by existential introduction, 2d).
 3.  (*x*(*n*)+*y*(*n*)) converges to (*L*+*M*) (by 2).
 
 Therefore we derive the function:
@@ -72,7 +72,7 @@ Here, *Pn*(*x*) is the *n*th Taylor polynomial and *Rn*(*x*) is the remainder or
 
 > |*Rn*(*x*)| = |(((*n*+1)th derivative of sin)(*z*)/(*n*+1)!)*(*x*-*x*0)^(n+1)| < (1/(*n*+1)!)(*x*-*x*0)$.
 
-Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term *Rn*(*x*)$ is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the *n*th Taylor polynomial of the sine of *x* where *Rn*(*x*) < `eps`. We proved that if *x* converges to *L*, then sineQ(*x*(*n*), 1/*n*) converges to sin(*L*). Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
+Therefore, to find the sine of a number to a certain number of digits, we merely need to find a number `n` such that the error term *Rn*(*x*) is less than our desired error `eps`. We devised a function `sineQ(x, eps)` which returns the *n*th Taylor polynomial of the sine of *x* where *Rn*(*x*) < `eps`. We proved that if *x* converges to *L*, then sineQ(*x*(*n*), 1/*n*) converges to sin(*L*). Therefore, the `sine` function returns `lambda n: sineQ(x(n), 1/n)`.
 
 Usage
 ---
